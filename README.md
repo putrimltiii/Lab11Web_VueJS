@@ -37,66 +37,65 @@ curl -L -o assets/js/vue.global.js https://unpkg.com/vue@3/dist/vue.global.js
 curl -L -o assets/js/axios.min.js https://unpkg.com/axios/dist/axios.min.js
 ```
 
-> 📸 Screenshot hasil download di CMD
+<img width="1456" height="819" alt="image" src="https://github.com/user-attachments/assets/80901d3f-fdcd-4c1c-b302-67b5bf1bc769" />
+
 
 ---
 
 ### 3. Membuat File index.html
 Membuat tampilan tabel daftar artikel beserta form modal untuk tambah dan ubah data.
 
-> 📸 Screenshot isi file index.html di VS Code
-
 ---
 
 ### 4. Membuat File app.js
 Membuat logika Vue untuk menampilkan, menambah, mengubah, dan menghapus data artikel melalui REST API.
-
-> 📸 Screenshot isi file app.js di VS Code
 
 ---
 
 ### 5. Membuat File style.css
 Menambahkan styling untuk tampilan tabel dan form modal.
 
-> 📸 Screenshot isi file style.css di VS Code
-
 ---
 
 ### 6. Konfigurasi CORS di CodeIgniter 4
 Mengaktifkan CORS di `app/Config/Filters.php` agar VueJS bisa mengakses API dari CI4.
-
-> 📸 Screenshot file Filters.php
 
 ---
 
 ### 7. Hasil Tampilan Daftar Artikel
 Membuka `http://localhost/lab8_vuejs` di browser, data artikel berhasil ditampilkan dari REST API CI4.
 
-> 📸 Screenshot tampilan daftar artikel di browser
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d941e2e6-7ab9-4c86-a0c2-f711ff8351a3" />
+
 
 ---
 
 ### 8. Fitur Tambah Data
 Klik tombol **Tambah Data**, isi form judul, isi, dan status, lalu klik Simpan.
 
-> 📸 Screenshot form tambah data
-> 📸 Screenshot setelah data berhasil ditambahkan
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b88c6e6c-567f-4d85-a0d5-59f8ccadcba1" />
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/dcb6bba8-f3f2-41f5-9c60-89494de6b0e5" />
+
 
 ---
 
 ### 9. Fitur Edit Data
 Klik tombol **Edit** pada salah satu artikel, ubah data, lalu klik Simpan.
 
-> 📸 Screenshot form edit data terisi
-> 📸 Screenshot setelah data berhasil diubah
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/845a9fd6-2128-411f-a4a4-58ff2b613823" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d09c4d7d-4bcf-4723-9415-946d956ab8a7" />
+
 
 ---
 
 ### 10. Fitur Hapus Data
 Klik tombol **Hapus** pada salah satu artikel, konfirmasi hapus.
 
-> 📸 Screenshot konfirmasi hapus
-> 📸 Screenshot setelah data berhasil dihapus
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/45395c5b-eaa0-4c22-af2f-8a327c036df0" />
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9c3c1c97-222b-43e7-8250-5f2c77776350" />
+
 
 ---
 
