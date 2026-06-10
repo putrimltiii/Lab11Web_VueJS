@@ -1,5 +1,8 @@
 # Lab11Web_VueJS
 # Praktikum 11 - Frontend VueJS
+# Nama: Putri Melati Ramadhaniati
+# NIM: 312410194
+# Kelas: I241B
 
 ## Tujuan Praktikum
 1. Memahami konsep dasar API
