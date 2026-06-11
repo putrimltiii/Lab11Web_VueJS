@@ -1,4 +1,4 @@
-# Lab11Web_VueJS
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/e1a03692-79d1-46da-ba09-d3ce61c3a60f" /># Lab11Web_VueJS
 # Praktikum 11 - Frontend VueJS
 # Nama: Putri Melati Ramadhaniati
 # NIM: 312410194
@@ -253,6 +253,7 @@ Isi form login dengan username dan password yang valid, klik Masuk Aplikasi. Sis
 ### 9. Fitur Logout
 Klik menu Logout, muncul konfirmasi. Setelah konfirmasi, session dihapus dari localStorage dan diarahkan kembali ke halaman Beranda.
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4f7ce9bc-338a-4236-bcf9-63bb40405f04" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/bab3e6c1-405b-49f0-97c4-7540452fd3d6" />
 
 
