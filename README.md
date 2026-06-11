@@ -119,3 +119,89 @@ $data = [
     'status' => $json['status'] ?? null,
 ];
 ```
+
+# Praktikum 12 - VueJS Komponen dan Routing (Single Page Application)
+
+---
+
+## Tujuan Praktikum
+1. Memahami konsep komponen pada Framework VueJS
+2. Memahami konsep Client-Side Routing untuk membangun Single Page Application (SPA)
+3. Mengimplementasikan komponen dan routing menggunakan Vue Router berbasis CDN
+
+---
+
+## Langkah-Langkah Praktikum
+
+### 1. Download Library Vue Router
+Download Vue Router secara lokal menggunakan CMD:
+
+> 📸 Screenshot hasil download CMD
+
+### 2. Struktur Folder Project
+
+> 📸 Screenshot struktur folder di VS Code
+
+### 3. Membuat Komponen Home.js
+Membuat file `assets/components/Home.js` sebagai halaman beranda.
+
+> 📸 Screenshot isi file Home.js di VS Code
+
+### 4. Membuat Komponen Artikel.js
+Memindahkan logika CRUD artikel ke komponen terisolasi `assets/components/Artikel.js`.
+
+> 📸 Screenshot isi file Artikel.js di VS Code
+
+### 5. Membuat Komponen About.js
+Membuat komponen baru `assets/components/About.js` berisi profil mahasiswa sebagai tugas tambahan.
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/813b367a-5c67-445b-8a6c-dd569344893d" />
+
+### 6. Mengkonfigurasi Vue Router di app.js
+Mendaftarkan semua rute dan komponen pada `assets/js/app.js`.
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1cf3b4e5-dcc7-463c-b294-b8006b22ff10" />
+
+
+### 7. Update index.html
+Menambahkan Vue Router dan navigasi menggunakan `router-link` dan `router-view`.
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6e4c9532-43c7-4542-a985-930554971f6e" />
+
+
+### 8. Hasil Halaman Beranda
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/531201fc-b86a-4c8c-acc2-770fc88420a7" />
+
+
+### 9. Hasil Halaman Kelola Artikel
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6b7bc3ca-eaf7-4e16-80a7-6cc4a5308b02" />
+
+
+### 10. Hasil Halaman About
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d9cf1e33-3478-4efe-bc8f-62d4397befe1" />
+
+
+---
+
+## Hasil Pengujian SPA
+
+| No | Menu | URL | Hasil |
+|----|------|-----|-------|
+| 1 | Beranda | /#/ | Tampil halaman beranda |
+| 2 | Kelola Artikel | /#/artikel | Tampil daftar artikel |
+| 3 | About | /#/about | Tampil profil mahasiswa |
+
+---
+
+## Kendala dan Solusi
+
+**Kendala 1:** File `Home.js` dan `Artikel.js` tidak ditemukan (404) karena path di `index.html` salah.
+
+**Solusi:** Path disesuaikan dari `assets/js/components/` menjadi `assets/components/` sesuai lokasi file yang sebenarnya.
+
+**Kendala 2:** Error `Identifier 'About' has already been declared`.
+
+**Solusi:** Kode komponen `About` yang tidak sengaja ada di `app.js` dihapus karena sudah ada di file `About.js` tersendiri.
