@@ -206,3 +206,79 @@ Ternyata path-nya salah di index.
 **Kendala 2:** Error `Identifier 'About' has already been declared`.
 
 **Solusi:** Kode komponen `About` yang tidak sengaja ada di `app.js` dihapus karena sudah ada di file `About.js` tersendiri.
+
+# Praktikum 13 - VueJS Autentikasi dan Navigation Guards (SPA Security)
+
+---
+
+## Tujuan
+Di praktikum ini saya belajar cara mengamankan halaman pada aplikasi SPA menggunakan Navigation Guards dari Vue Router. Selain itu juga belajar bikin endpoint login di sisi backend CI4 dan menghubungkannya ke frontend VueJS lewat Axios.
+
+---
+
+## Langkah Praktikum
+
+### 1. Membuat Auth Controller di CI4
+Buat file baru di `app/Controllers/Api/Auth.php` untuk menangani proses login dari frontend. Controller ini menerima username dan password, lalu memverifikasinya ke database.
+
+<img width="300" height="159" alt="image" src="https://github.com/user-attachments/assets/6488ff2e-4412-43d1-8ba9-ee724b9cec5c" />
+
+Daftarkan route POST untuk endpoint login di `app/Config/Routes.php`.
+
+### 3. Membuat Komponen Login.js
+Buat file `assets/components/Login.js` yang berisi form login. Komponen ini mengirim data username dan password ke API backend menggunakan Axios, lalu menyimpan token ke localStorage jika login berhasil.
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4a198d4c-2921-433f-8412-f39e9f5ec926" />
+
+### 4. Update app.js — Navigation Guards
+Update `assets/js/app.js` dengan menambahkan route `/login`, properti `meta: { requiresAuth: true }` pada route `/artikel` dan `/about`, fungsi `router.beforeEach()` sebagai pencegat akses rute, dan fungsi `logout()` untuk menghapus session dari localStorage.
+
+### 5. Update index.html
+Tambahkan script Login.js dan ubah navigasi agar tampil Login/Logout secara dinamis menggunakan `v-if` dan `v-else`.
+
+### 6. Tambah CSS Login
+Tambahkan styling form login di bagian bawah `assets/css/style.css`.
+
+### 7. Skenario A — Akses Ditolak (Belum Login)
+Saat belum login dan mencoba klik menu Kelola Artikel, sistem langsung menolak akses, menampilkan alert, dan mengarahkan ke halaman login.
+
+<img width="1456" height="819" alt="image" src="https://github.com/user-attachments/assets/89a47f92-452e-4a9d-956b-7d715bbf2515" />
+<img width="1456" height="819" alt="image" src="https://github.com/user-attachments/assets/ae22c058-a404-468c-812a-e870aa04388c" />
+
+### 8. Skenario B — Login Berhasil
+Isi form login dengan username dan password yang valid, klik Masuk Aplikasi. Sistem memvalidasi ke backend CI4 lewat Axios, lalu masuk ke halaman Kelola Artikel. Menu navigasi berubah dari Login menjadi Logout.
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/e1d29558-10c9-4b79-9550-b84b117f9a20" />
+
+### 9. Fitur Logout
+Klik menu Logout, muncul konfirmasi. Setelah konfirmasi, session dihapus dari localStorage dan diarahkan kembali ke halaman Beranda.
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/bab3e6c1-405b-49f0-97c4-7540452fd3d6" />
+
+
+---
+
+## Hasil Pengujian
+
+| No | Skenario | Kondisi | Hasil |
+|----|----------|---------|-------|
+| 1 | Akses /artikel tanpa login | Belum login | ✅ Ditolak, diarahkan ke /login |
+| 2 | Akses /about tanpa login | Belum login | ✅ Ditolak, diarahkan ke /login |
+| 3 | Login dengan kredensial valid | Form diisi benar | ✅ Masuk ke halaman artikel |
+| 4 | Logout | Sudah login | ✅ Session terhapus, kembali ke beranda |
+
+---
+
+## Analisis Cara Kerja
+
+**router.beforeEach()** bekerja sebagai interceptor — setiap kali user mau pindah halaman, fungsi ini dicek dulu. Kalau halaman tujuan punya `meta: { requiresAuth: true }` dan localStorage tidak punya `isLoggedIn = true`, maka akses ditolak dan diarahkan paksa ke `/login`.
+
+**Axios HTTP Post** dipakai untuk mengirim data username dan password ke endpoint `/api/login` di backend CI4. Kalau verifikasi berhasil, backend kirim token dan status 200, lalu token disimpan di localStorage browser sebagai bukti sudah login.
+
+---
+
+## Kendala dan Solusi
+
+**Kendala:** Warna tampilan masih biru setelah update CSS.
+
+**Solusi:** Lakukan hard refresh dengan Ctrl+Shift+R agar browser memuat ulang file CSS yang terbaru dan tidak menggunakan cache lama.
