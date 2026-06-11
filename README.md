@@ -283,3 +283,73 @@ Klik menu Logout, muncul konfirmasi. Setelah konfirmasi, session dihapus dari lo
 **Kendala:** Warna tampilan masih biru setelah update CSS.
 
 **Solusi:** Lakukan hard refresh dengan Ctrl+Shift+R agar browser memuat ulang file CSS yang terbaru dan tidak menggunakan cache lama.
+
+# Praktikum 14 - API Authentication dan Token-Based Security
+
+---
+
+## Tujuan
+Di praktikum ini saya belajar cara mengamankan REST API menggunakan token-based authentication. Backend CI4 dilindungi filter yang mengecek token di setiap request POST, PUT, dan DELETE. Sementara di sisi frontend, Axios Interceptors dipakai supaya token terkirim otomatis tanpa harus ditambahkan manual di setiap request.
+
+---
+
+## Langkah Praktikum
+
+### 1. Membuat ApiAuthFilter.php
+Buat file `app/Filters/ApiAuthFilter.php` di project CI4. Filter ini bertugas mengecek header Authorization di setiap request yang masuk. Kalau tidak ada token atau tokennya kosong, request langsung ditolak dengan status 401.
+
+> 📸 Screenshot isi file ApiAuthFilter.php di VS Code
+
+### 2. Mendaftarkan Filter di Filters.php
+Daftarkan alias `apiauth` di `app/Config/Filters.php` supaya filter bisa dipanggil dari Routes.
+
+### 3. Menerapkan Filter ke Routes.php
+Hapus `$routes->resource('post')` dan ganti dengan route manual. Endpoint GET dibiarkan bebas, sedangkan POST, PUT, dan DELETE dilindungi dengan `['filter' => 'apiauth']`.
+
+### 4. Update app.js — Axios Interceptors
+Tambahkan Axios Interceptors di `assets/js/app.js`. Request interceptor menyuntikkan token dari localStorage ke header Authorization secara otomatis. Response interceptor menangkap error 401 dan mengarahkan user ke halaman login jika token tidak valid atau kedaluwarsa.
+
+### 5. Test Postman — Tanpa Token (401)
+Kirim POST request ke `http://localhost/lab11_ci/ci4/public/post` tanpa header Authorization. Hasilnya 401 Unauthorized dengan pesan "Akses Ditolak. Token tidak ditemukan pada request!".
+
+<img width="1456" height="819" alt="image" src="https://github.com/user-attachments/assets/6ff5b9cd-02ea-4d2a-8255-0738c565119c" />
+
+### 6. Test Postman — Dengan Token (201)
+Tambahkan header `Authorization: Bearer TOKEN-SECRET-admin` lalu kirim ulang request POST. Hasilnya 201 Created — data berhasil ditambahkan karena token valid.
+
+<img width="1456" height="819" alt="image" src="https://github.com/user-attachments/assets/fa2f2a90-ffd2-4cc6-b034-8dfc19ddf77b" />
+
+
+### 7. Verifikasi Axios Interceptors di Browser
+Buka browser ke `http://localhost/lab8_vuejs`, login, lalu buka DevTools → Network. Lakukan operasi di halaman Kelola Artikel, klik request `post` di panel Network → tab Headers → Request Headers. Terlihat `Authorization: Bearer ...` terkirim otomatis oleh Axios Interceptors.
+
+<img width="1456" height="819" alt="image" src="https://github.com/user-attachments/assets/e613a4ac-106b-4fd0-b4b5-f4567843f2b0" />
+
+
+---
+
+## Hasil Pengujian
+
+| No | Kondisi | Method | Hasil |
+|----|---------|--------|-------|
+| 1 | Tanpa token | POST | 401 Unauthorized — ditolak |
+| 2 | Dengan token valid | POST | 201 Created — berhasil |
+| 3 | Axios Interceptors aktif | GET (load data) | Token terkirim otomatis di header |
+
+---
+
+## Analisis Cara Kerja
+
+**ApiAuthFilter** bekerja sebagai penjaga di sisi backend — setiap request yang masuk ke endpoint POST, PUT, DELETE akan dicek dulu headernya. Kalau tidak ada `Authorization: Bearer ...`, request langsung diblokir sebelum sampai ke controller.
+
+**Axios Interceptors** bekerja di sisi frontend — setiap kali Axios mau kirim request, interceptor menyisipkan token dari localStorage ke header secara otomatis. Jadi tidak perlu tambahkan header manual di setiap fungsi `loadData`, `saveData`, atau `hapus`.
+
+Kombinasi keduanya membentuk sistem keamanan end-to-end: frontend selalu kirim token, backend selalu verifikasi token.
+
+---
+
+## Kendala dan Solusi
+
+**Kendala:** Filter tidak terpanggil meski sudah didaftarkan, request POST tetap berhasil tanpa token.
+
+**Solusi:** Ternyata `$routes->resource('post')` lebih prioritas dari route manual di bawahnya. Solusinya adalah menghapus `$routes->resource('post')` dan menggantinya dengan route manual terpisah per method, sehingga filter `apiauth` bisa diterapkan hanya ke POST, PUT, dan DELETE saja.
