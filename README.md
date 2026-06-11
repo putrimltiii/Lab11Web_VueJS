@@ -317,8 +317,7 @@ Kirim POST request ke `http://localhost/lab11_ci/ci4/public/post` tanpa header A
 ### 6. Test Postman — Dengan Token (201)
 Tambahkan header `Authorization: Bearer TOKEN-SECRET-admin` lalu kirim ulang request POST. Hasilnya 201 Created — data berhasil ditambahkan karena token valid.
 
-<img width="1456" height="819" alt="image" src="https://github.com/user-attachments/assets/fa2f2a90-ffd2-4cc6-b034-8dfc19ddf77b" />
-
+<img width="1456" height="819" alt="image" src="https://github.com/user-attachments/assets/b44841f9-f1fa-489d-8af7-d41472186da8" />
 
 ### 7. Verifikasi Axios Interceptors di Browser
 Buka browser ke `http://localhost/lab8_vuejs`, login, lalu buka DevTools → Network. Lakukan operasi di halaman Kelola Artikel, klik request `post` di panel Network → tab Headers → Request Headers. Terlihat `Authorization: Bearer ...` terkirim otomatis oleh Axios Interceptors.
