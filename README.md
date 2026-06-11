@@ -194,14 +194,15 @@ Menambahkan Vue Router dan navigasi menggunakan `router-link` dan `router-view`.
 | 2 | Kelola Artikel | /#/artikel | Tampil daftar artikel |
 | 3 | About | /#/about | Tampil profil mahasiswa |
 
+Perpindahan antar halaman lancar dan browser tidak reload sama sekali — SPA-nya berhasil.
+
 ---
 
-## Kendala dan Solusi
+## Kendala yang Saya Temui
 
-**Kendala 1:** File `Home.js` dan `Artikel.js` tidak ditemukan (404) karena path di `index.html` salah.
+**Kendala 1:** File Home.js dan Artikel.js error 404 tidak ketemu.
 
-**Solusi:** Path disesuaikan dari `assets/js/components/` menjadi `assets/components/` sesuai lokasi file yang sebenarnya.
-
+Ternyata path-nya salah di index.
 **Kendala 2:** Error `Identifier 'About' has already been declared`.
 
 **Solusi:** Kode komponen `About` yang tidak sengaja ada di `app.js` dihapus karena sudah ada di file `About.js` tersendiri.
